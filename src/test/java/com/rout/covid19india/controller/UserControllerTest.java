@@ -36,7 +36,7 @@ public class UserControllerTest {
         final UUID id = UUID.randomUUID();
         final UserDto requestUserDto = TestData.create_userDto();
 
-        final UserDto savedUserDto = requestUserDto;
+        final UserDto savedUserDto = TestData.create_userDto();
         savedUserDto.setId(id);
 
         Mockito.when(userService.saveOrUpdate(Mockito.any(UserDto.class))).thenReturn(savedUserDto);

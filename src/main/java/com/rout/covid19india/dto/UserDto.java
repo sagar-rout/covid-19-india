@@ -5,7 +5,6 @@ import com.rout.covid19india.validation.ValidateOnCreate;
 import com.rout.covid19india.validation.ValidateOnUpdate;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class UserDto {
