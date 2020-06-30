@@ -49,6 +49,11 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
             <exclusions>
@@ -90,6 +95,7 @@
                 <executions>
                     <execution>
                         <id>prepare-it-database</id>
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>start</goal>
                         </goals>
@@ -100,14 +106,8 @@
                                     <alias>it-database</alias>
                                     <run>
                                         <ports>
-                                            <port>it-database.port:32547</port>
+                                            <port>32547:5432</port>
                                         </ports>
-                                        <wait>
-                                            <log>(?s)database system is ready to accept connections.*database system is
-                                                ready to accept connections
-                                            </log>
-                                            <time>100000</time>
-                                        </wait>
                                     </run>
                                 </image>
                             </images>
@@ -115,6 +115,7 @@
                     </execution>
                     <execution>
                         <id>remove-it-database</id>
+                        <phase>post-integration-test</phase>
                         <goals>
                             <goal>stop</goal>
                         </goals>
