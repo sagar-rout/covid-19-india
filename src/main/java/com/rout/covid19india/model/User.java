@@ -11,6 +11,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * @author Sagar Rout
+ */
 @Entity
 @Table(name = "users") //postgres already have user table
 public class User {

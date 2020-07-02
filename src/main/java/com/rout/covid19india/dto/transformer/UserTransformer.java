@@ -4,6 +4,9 @@ import com.rout.covid19india.dto.UserDto;
 import com.rout.covid19india.model.User;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Sagar Rout
+ */
 @Component
 public class UserTransformer {
 

@@ -7,6 +7,9 @@ import com.rout.covid19india.validation.ValidateOnUpdate;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
+/**
+ * @author Sagar Rout
+ */
 public class UserDto {
 
     @ServerGeneratedValue(groups = ValidateOnCreate.class)

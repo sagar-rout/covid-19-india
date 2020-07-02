@@ -5,10 +5,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * @author Sagar Rout
+ */
 @Entity
 public class Country {
 
@@ -17,9 +21,6 @@ public class Country {
 
     @Column(nullable = false)
     private String name;
-
-    @OneToMany(mappedBy = "country", orphanRemoval = true, cascade = CascadeType.ALL)
-    private final Set<State> states = new HashSet<>();
 
     @Column(nullable = false)
     private int activeCases;
@@ -32,6 +33,18 @@ public class Country {
 
     @Column(nullable = false)
     private int migrated;
+
+    @Column(nullable = false)
+    private int totalSamplesTested;
+
+    @Column(nullable = false)
+    private LocalDateTime lastUpdated;
+
+    @Column(nullable = false)
+    private LocalDateTime lastUpdatedFromSource;
+
+    @OneToMany(mappedBy = "country", orphanRemoval = true, cascade = CascadeType.ALL)
+    private final Set<State> states = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -53,6 +66,12 @@ public class Country {
 
     public Set<State> getStates() {
         return states;
+    }
+
+    public Country setStates(Set<State> states) {
+        this.states.clear();
+        this.states.addAll(states);
+        return this;
     }
 
     public int getActiveCases() {
@@ -91,11 +110,45 @@ public class Country {
         return this;
     }
 
+    public int getTotalSamplesTested() {
+        return totalSamplesTested;
+    }
+
+    public Country setTotalSamplesTested(int totalSamplesTested) {
+        this.totalSamplesTested = totalSamplesTested;
+        return this;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public Country setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
+        return this;
+    }
+
+    public LocalDateTime getLastUpdatedFromSource() {
+        return lastUpdatedFromSource;
+    }
+
+    public Country setLastUpdatedFromSource(LocalDateTime lastUpdatedFromSource) {
+        this.lastUpdatedFromSource = lastUpdatedFromSource;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Country{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", activeCases=" + activeCases +
+                ", cured=" + cured +
+                ", deaths=" + deaths +
+                ", migrated=" + migrated +
+                ", totalSamplesTested=" + totalSamplesTested +
+                ", lastUpdated=" + lastUpdated +
+                ", lastUpdatedFromSource=" + lastUpdatedFromSource +
                 '}';
     }
 }

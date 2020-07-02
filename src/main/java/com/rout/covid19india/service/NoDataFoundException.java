@@ -3,11 +3,11 @@ package com.rout.covid19india.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.UUID;
+
 /**
  * @author Sagar Rout
  */
-import java.util.UUID;
-
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class NoDataFoundException extends RuntimeException {
 

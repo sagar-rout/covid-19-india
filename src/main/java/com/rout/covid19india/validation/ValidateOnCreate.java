@@ -1,7 +1,7 @@
 package com.rout.covid19india.validation;
 
 /**
- * @author sagar_rout@hotmail.com
+ * @author Sagar Rout
  */
 public interface ValidateOnCreate {
 }
