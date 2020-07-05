@@ -1,0 +1,8 @@
+version: 2.1
+executorType: machine
+jobs:
+  build:
+    steps:
+      - checkout
+
+      - run: mvn -B clean verify -Dspring.profiles.active=test
