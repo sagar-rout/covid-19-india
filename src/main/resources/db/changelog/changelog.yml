@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: SR
+      comment: "Create initial tables"
+      failOnError: true
+      logicalFilePath: "path-independent"
+      runInTransaction: true
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/scripts/1_create_user_table.sql
+            encoding: utf8
