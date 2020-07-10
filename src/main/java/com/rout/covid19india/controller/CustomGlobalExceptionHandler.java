@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @author Sagar Rout
+ * @author Sagar Rout (sagar@rout.dev)
  */
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -27,6 +27,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(NoDataFoundException.class)
     public void customHandleError(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.NOT_FOUND.value());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public void badRequestError(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
     @Override

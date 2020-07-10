@@ -4,11 +4,12 @@ import com.rout.covid19india.validation.ServerGeneratedValue;
 import com.rout.covid19india.validation.ValidateOnCreate;
 import com.rout.covid19india.validation.ValidateOnUpdate;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 /**
- * @author Sagar Rout
+ * @author Sagar Rout (sagar@rout.dev)
  */
 public class UserDto {
 
@@ -17,7 +18,8 @@ public class UserDto {
     private UUID id;
 
     @NotBlank(groups = {ValidateOnUpdate.class, ValidateOnCreate.class}, message = "name is required.")
-    private String name;
+    //@Email(groups = {ValidateOnUpdate.class, ValidateOnCreate.class}, message = "email id is not valid.")
+    private String emailId;
 
     @ServerGeneratedValue(groups = ValidateOnCreate.class)
     @NotBlank(groups = {ValidateOnUpdate.class}, message = "accessToken is required.")
@@ -35,12 +37,12 @@ public class UserDto {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public UserDto setName(String name) {
-        this.name = name;
+    public UserDto setEmailId(String emailId) {
+        this.emailId = emailId;
         return this;
     }
 
@@ -66,7 +68,7 @@ public class UserDto {
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", emailId='" + emailId + '\'' +
                 ", purpose='" + purpose + '\'' +
                 '}';
     }

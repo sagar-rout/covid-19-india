@@ -18,4 +18,8 @@ public class NoDataFoundException extends RuntimeException {
     public NoDataFoundException(String entity, UUID id) {
         super(String.format("Entity %s with %s not found", entity, id));
     }
+
+    public NoDataFoundException(String message) {
+        super(message);
+    }
 }

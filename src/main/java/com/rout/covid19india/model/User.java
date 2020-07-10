@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * @author Sagar Rout
+ * @author Sagar Rout (sagar@rout.dev)
  */
 @Entity
 @Table(name = "users") //postgres already have user table
