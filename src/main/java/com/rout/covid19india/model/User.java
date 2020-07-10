@@ -3,17 +3,13 @@ package com.rout.covid19india.model;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * @author Sagar Rout
+ * @author Sagar Rout (sagar@rout.dev)
  */
 @Entity
 @Table(name = "users") //postgres already have user table
@@ -21,6 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue
+    @Column(name = "user_id")
     private UUID id;
 
     @Column(nullable = false)
@@ -30,15 +27,6 @@ public class User {
     @Column(nullable = false)
     private String emailId;
 
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public User setEmailId(String emailId) {
-        this.emailId = emailId;
-        return this;
-    }
-
     @Column(nullable = false)
     private String purpose;
 
@@ -47,6 +35,15 @@ public class User {
 
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public User setEmailId(String emailId) {
+        this.emailId = emailId;
+        return this;
+    }
 
     public UUID getId() {
         return id;

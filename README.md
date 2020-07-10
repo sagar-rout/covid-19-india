@@ -10,7 +10,7 @@ from the website.
 
 ### 1. Register yourself and get access token
 
-POST /covid-19-india/users 
+POST /users 
 
 > Request Body
 ```json
@@ -20,12 +20,26 @@ POST /covid-19-india/users
 }
 ```  
 
-> Response Body
+> Response
 ```json
  {
    "id" : "47422e0a-b219-4521-829c-7d9e81c2cfb7",
    "emailId" : "john@doe.com",
-   "accessToken" : "X5SJ4VRNaSRObmn1ddx6X5SJ4VRNaSRObmn1ddx6",
+   "accessToken" : "X5SJ4VRNaSRObmn1dd",
    "purpose" : "data analytics"
  }
  ```
+
+### 2. Use access token to get your information
+
+GET /users?emailId=john@doe.com
+
+> Response
+```json
+ {
+   "id" : "47422e0a-b219-4521-829c-7d9e81c2cfb7",
+   "emailId" : "john@doe.com",
+   "accessToken" : "X5SJ4VRNaSRObmn1dd",
+   "purpose" : "data analytics"
+ }
+```

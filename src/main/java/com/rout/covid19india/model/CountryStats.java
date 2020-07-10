@@ -6,18 +6,23 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author Sagar Rout
+ * @author Sagar Rout (sagar@rout.dev)
  * @author divya singh
  */
 @Entity
-public class CountryStats extends RegionBasedEntity{
+public class CountryStats extends Region {
 
     @Id
+    @GeneratedValue
+    @Column(name = "country_stats_id")
     private UUID id;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Country name;
+    private Country countryName;
+
+    @Column(nullable = false)
+    private String countryCode;
 
     @Column(nullable = false)
     private int migrated;
@@ -34,15 +39,6 @@ public class CountryStats extends RegionBasedEntity{
 
     public CountryStats setId(UUID id) {
         this.id = id;
-        return this;
-    }
-
-    public Country getName() {
-        return name;
-    }
-
-    public CountryStats setName(Country name) {
-        this.name = name;
         return this;
     }
 
@@ -74,14 +70,33 @@ public class CountryStats extends RegionBasedEntity{
         return this;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public CountryStats setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+        return this;
+    }
+
+    public Country getCountryName() {
+        return countryName;
+    }
+
+    public CountryStats setCountryName(Country countryName) {
+        this.countryName = countryName;
+        return this;
+    }
+
     @Override
     public String toString() {
-        return "CountryStatus{" +
+        return "CountryStats{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", countryName=" + countryName +
+                ", countryCode='" + countryCode + '\'' +
                 ", migrated=" + migrated +
                 ", totalSamplesTested=" + totalSamplesTested +
-                ", states=" + stateStats +
+                ", stateStats=" + stateStats +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.rout.covid19india.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
@@ -8,7 +10,7 @@ import java.time.LocalDateTime;
  * @author divya singh
  */
 @MappedSuperclass
-public abstract class RegionBasedEntity {
+public abstract class Region {
 
     @Column(nullable = false)
     private int activeCases;
@@ -20,6 +22,7 @@ public abstract class RegionBasedEntity {
     private int deaths;
 
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime lastUpdated;
 
     @Column(nullable = false)
@@ -29,7 +32,7 @@ public abstract class RegionBasedEntity {
         return activeCases;
     }
 
-    public RegionBasedEntity setActiveCases(int activeCases) {
+    public Region setActiveCases(int activeCases) {
         this.activeCases = activeCases;
         return this;
     }
@@ -38,7 +41,7 @@ public abstract class RegionBasedEntity {
         return curedCases;
     }
 
-    public RegionBasedEntity setCuredCases(int curedCases) {
+    public Region setCuredCases(int curedCases) {
         this.curedCases = curedCases;
         return this;
     }
@@ -47,7 +50,7 @@ public abstract class RegionBasedEntity {
         return deaths;
     }
 
-    public RegionBasedEntity setDeaths(int deaths) {
+    public Region setDeaths(int deaths) {
         this.deaths = deaths;
         return this;
     }
@@ -56,16 +59,11 @@ public abstract class RegionBasedEntity {
         return lastUpdated;
     }
 
-    public RegionBasedEntity setLastUpdated(LocalDateTime lastUpdated) {
-        this.lastUpdated = lastUpdated;
-        return this;
-    }
-
     public LocalDateTime getLastUpdatedFromSource() {
         return lastUpdatedFromSource;
     }
 
-    public RegionBasedEntity setLastUpdatedFromSource(LocalDateTime lastUpdatedFromSource) {
+    public Region setLastUpdatedFromSource(LocalDateTime lastUpdatedFromSource) {
         this.lastUpdatedFromSource = lastUpdatedFromSource;
         return this;
     }

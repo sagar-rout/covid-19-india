@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 public class UserTransformer {
 
     public UserDto fromDomain(User domain) {
-        return new UserDto().setName(domain.getEmailId())
+        return new UserDto().setEmailId(domain.getEmailId())
                 .setId(domain.getId())
+                .setAccessToken(domain.getAccessToken())
                 .setPurpose(domain.getPurpose());
     }
 
     public User fromDto(UserDto dto) {
-        return new User().setEmailId(dto.getName())
+        return new User().setEmailId(dto.getEmailId())
                 .setPurpose(dto.getPurpose());
     }
 }

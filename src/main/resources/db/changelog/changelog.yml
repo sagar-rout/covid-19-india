@@ -2,11 +2,22 @@ databaseChangeLog:
   - changeSet:
       id: 1
       author: SR
-      comment: "Create initial tables"
+      comment: "Create user table"
       failOnError: true
       logicalFilePath: "path-independent"
       runInTransaction: true
       changes:
         - sqlFile:
             path: classpath:/db/changelog/scripts/1_create_user_table.sql
+            encoding: utf8
+  - changeSet:
+      id: 2
+      author: SR
+      comment: "Create country and stats table"
+      failOnError: true
+      logicalFilePath: "path-independent"
+      runInTransaction: true
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/scripts/2_create_country_state_stats_table.sql
             encoding: utf8

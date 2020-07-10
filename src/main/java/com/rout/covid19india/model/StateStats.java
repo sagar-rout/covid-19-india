@@ -4,20 +4,26 @@ import javax.persistence.*;
 import java.util.UUID;
 
 /**
- * @author Sagar Rout
+ * @author Sagar Rout (sagar@rout.dev)
  * @author divya singh
  */
 @Entity
-public class StateStats extends RegionBasedEntity {
+public class StateStats extends Region {
 
     @Id
+    @GeneratedValue
+    @Column(name = "state_stats_id")
     private UUID id;
 
-    @Column
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private State name;
+    private State stateName;
+
+    @Column(nullable = false)
+    private String stateCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_stats_id")
     private CountryStats countryStats;
 
     public UUID getId() {
@@ -26,15 +32,6 @@ public class StateStats extends RegionBasedEntity {
 
     public StateStats setId(UUID id) {
         this.id = id;
-        return this;
-    }
-
-    public State getName() {
-        return name;
-    }
-
-    public StateStats setName(State name) {
-        this.name = name;
         return this;
     }
 
@@ -47,12 +44,31 @@ public class StateStats extends RegionBasedEntity {
         return this;
     }
 
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public StateStats setStateCode(String stateCode) {
+        this.stateCode = stateCode;
+        return this;
+    }
+
+    public State getStateName() {
+        return stateName;
+    }
+
+    public StateStats setStateName(State stateName) {
+        this.stateName = stateName;
+        return this;
+    }
+
     @Override
     public String toString() {
-        return "StateStatus{" +
+        return "StateStats{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", country=" + countryStats +
+                ", stateName=" + stateName +
+                ", stateCode='" + stateCode + '\'' +
+                ", countryStats=" + countryStats +
                 '}';
     }
 }
