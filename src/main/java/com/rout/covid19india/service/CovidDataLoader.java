@@ -12,7 +12,7 @@ public class CovidDataLoader {
     private static final String INDIA_GOVT_COVID_URI = "https://www.mygov.in/covid-19/";
 
     public void loadCovidData() throws Exception {
-        final Document document = Jsoup.connect(INDIA_GOVT_COVID_URI).get();
+        /*final Document document = Jsoup.connect(INDIA_GOVT_COVID_URI).get();
 
         System.out.println("Active cases");
         System.out.println(Integer.parseInt(document.select("div.active-case > div.iblock_text > span.icount").text()));
@@ -45,6 +45,6 @@ public class CovidDataLoader {
             System.out.println(state.select("div.st_all_counts > div.tick-discharged > small").text());
             System.out.println(state.select("div.st_all_counts > div.tick-death > small").text());
 
-        }
+        }*/
     }
 }

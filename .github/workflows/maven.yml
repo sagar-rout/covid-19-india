@@ -36,5 +36,8 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             docker pull docker.pkg.github.com/sagar-rout/covid-19-india/covid-19-india:latest
-            docker stop $(docker ps -qa) && docker rm $(docker ps -qa)
-            docker run -d --network host --name covid-19-india docker.pkg.github.com/sagar-rout/covid-19-india/covid-19-india:latest
+            docker stop covid-19-india
+            docker rm covid-19-india
+            docker run -d --network host --name covid-19-india \
+            -v $HOME/docker/volumes/covid-19-india/logs:/logs \
+            docker.pkg.github.com/sagar-rout/covid-19-india/covid-19-india:latest
