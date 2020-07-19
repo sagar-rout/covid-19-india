@@ -21,3 +21,25 @@ databaseChangeLog:
         - sqlFile:
             path: classpath:/db/changelog/scripts/2_create_country_state_stats_table.sql
             encoding: utf8
+  - changeSet:
+      id: 3
+      author: DS
+      comment: "Update state_stats table, add total_confirmed column"
+      failOnError: true
+      logicalFilePath: "path-independent"
+      runInTransaction: true
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/scripts/3_update_state_stats_table.sql
+            encoding: utf8
+  - changeSet:
+        id: 4
+        author: DS
+        comment: "Update country_stats table, add samples_tested_today column"
+        failOnError: true
+        logicalFilePath: "path-independent"
+        runInTransaction: true
+        changes:
+            - sqlFile:
+                  path: classpath:/db/changelog/scripts/4_alter_country_stats_table_add_samples_tested_today.sql
+                  encoding: utf8
