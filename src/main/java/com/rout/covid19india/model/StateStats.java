@@ -20,9 +20,13 @@ public class StateStats extends Region {
     private State stateName;
 
     @Column(nullable = false)
-    private String stateCode;
+    private int totalConfirmed;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private StateCode stateCode;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_stats_id")
     private CountryStats countryStats;
 
@@ -44,11 +48,11 @@ public class StateStats extends Region {
         return this;
     }
 
-    public String getStateCode() {
+    public StateCode getStateCode() {
         return stateCode;
     }
 
-    public StateStats setStateCode(String stateCode) {
+    public StateStats setStateCode(StateCode stateCode) {
         this.stateCode = stateCode;
         return this;
     }
@@ -62,11 +66,21 @@ public class StateStats extends Region {
         return this;
     }
 
+    public int getTotalConfirmed() {
+        return totalConfirmed;
+    }
+
+    public StateStats setTotalConfirmed(int totalConfirmed) {
+        this.totalConfirmed = totalConfirmed;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "StateStats{" +
                 "id=" + id +
                 ", stateName=" + stateName +
+                ", totalConfirmed=" + totalConfirmed +
                 ", stateCode='" + stateCode + '\'' +
                 ", countryStats=" + countryStats +
                 '}';

@@ -1,6 +1,8 @@
 package com.rout.covid19india.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -29,6 +31,9 @@ public class CountryStats extends Region {
 
     @Column(nullable = false)
     private int totalSamplesTested;
+
+    @Column(nullable = false)
+    private int samplesTestedToday;
 
     @OneToMany(mappedBy = "countryStats", orphanRemoval = true, cascade = CascadeType.ALL)
     private final Set<StateStats> stateStats = new HashSet<>();
@@ -88,6 +93,15 @@ public class CountryStats extends Region {
         return this;
     }
 
+    public int getSamplesTestedToday() {
+        return samplesTestedToday;
+    }
+
+    public CountryStats setSamplesTestedToday(int samplesTestedToday) {
+        this.samplesTestedToday = samplesTestedToday;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "CountryStats{" +
@@ -96,6 +110,7 @@ public class CountryStats extends Region {
                 ", countryCode='" + countryCode + '\'' +
                 ", migrated=" + migrated +
                 ", totalSamplesTested=" + totalSamplesTested +
+                ", samplesTestedToday=" + samplesTestedToday +
                 ", stateStats=" + stateStats +
                 '}';
     }

@@ -75,7 +75,6 @@ public abstract class Region {
                 ", curedCases=" + curedCases +
                 ", deaths=" + deaths +
                 ", lastUpdated=" + lastUpdated +
-                ", lastUpdatedFromSource=" + lastUpdatedFromSource +
                 '}';
     }
 }
