@@ -12,7 +12,7 @@ public class CovidScheduler {
         this.covidDataLoader = covidDataLoader;
     }
 
-    @Scheduled(cron = "0 0 5,17 * * ?") // twice a day at 5 AM and 5 PM
+    @Scheduled(cron = "0 0 5,17 * * ?", zone = "Asia/Kolkata") // twice a day at 5 AM and 5 PM
     public void loadLatestCovidData() throws Exception {
         covidDataLoader.loadCovidData();
     }

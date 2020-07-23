@@ -43,3 +43,14 @@ databaseChangeLog:
             - sqlFile:
                   path: classpath:/db/changelog/scripts/4_alter_country_stats_table_add_samples_tested_today.sql
                   encoding: utf8
+  - changeSet:
+      id: 5
+      author: SR
+      comment: "Remove user table"
+      failOnError: true
+      logicalFilePath: "path-independent"
+      runInTransaction: true
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/scripts/5_remove_user_table.sql
+            encoding: utf8

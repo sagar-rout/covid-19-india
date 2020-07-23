@@ -5,13 +5,24 @@ package com.rout.covid19india.model;
  */
 public enum Country {
 
-    INDIA("INDIA");
+    INDIA("INDIA", "IN");
 
-    Country(String text) {
+    Country(String text, String code) {
         this.text = text;
+        this.code = code;
     }
 
     private String text;
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public Country setCode(String code) {
+        this.code = code;
+        return this;
+    }
 
     public String getText() {
         return text;
