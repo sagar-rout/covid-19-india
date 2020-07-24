@@ -31,9 +31,4 @@ public class StateStatsController {
     public List<StateStatsDto> findAllStatsByStateCode(@RequestParam("stateCode") String stateCode) {
         return stateStatsService.findAllStatsByStateCode(stateCode);
     }
-
-    @GetMapping(value = "/state-stats", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<StateStatsDto> findAllStatesLatestStats() {
-        return stateStatsService.findAllStatesLatestStats();
-    }
 }

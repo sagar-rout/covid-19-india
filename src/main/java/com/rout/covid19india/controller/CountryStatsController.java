@@ -31,9 +31,4 @@ public class CountryStatsController {
     public List<CountryStatsDto> findAllStatsByCountryCode(@RequestParam("countryCode") String countryCode) {
         return countryStatsService.findAllStatsByCountryCode(countryCode);
     }
-
-    @GetMapping(value = "/country-stats", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CountryStatsDto> findAllCountriesLatestStats() {
-        return countryStatsService.findAllCountriesLatestStats();
-    }
 }
