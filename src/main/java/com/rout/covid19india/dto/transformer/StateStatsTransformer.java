@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class StateStatsTransformer {
 
-    public StateStatsDto fromDomainToDto(StateStats domain){
+    public StateStatsDto fromDomainToDto(StateStats domain) {
         return new StateStatsDto().setActiveCases(domain.getActiveCases())
+                .setStateName(domain.getStateName().getText())
                 .setCuredCases(domain.getCuredCases())
                 .setDeaths(domain.getDeaths())
                 .setLastUpdated(domain.getLastUpdated())

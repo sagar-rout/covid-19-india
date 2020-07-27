@@ -27,7 +27,7 @@ public class CountryStatsService {
     @Transactional(readOnly = true)
     public CountryStatsDto findLatestStatsByCountryCode(String countryCode) {
         final CountryStats countryStats = countryStatsRepository.findFirstByCountryCode(countryCode)
-                .orElseThrow(() -> new NoDataFoundException(String.format("Country with %s country code not found", countryCode)));
+                .orElseThrow(() -> new BadRequestException(String.format("Country Code %s not supported.", countryCode)));
 
         return countryStatsTransformer.fromDomainToDto(countryStats);
     }

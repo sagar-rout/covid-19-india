@@ -54,3 +54,14 @@ databaseChangeLog:
         - sqlFile:
             path: classpath:/db/changelog/scripts/5_remove_user_table.sql
             encoding: utf8
+  - changeSet:
+      id: 6
+      author: SR
+      comment: "Remove foreign key country_stats from and insert country code in state code"
+      failOnError: true
+      logicalFilePath: "path-independent"
+      runInTransaction: true
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/scripts/6_drop_fk_constraint_add_column_country_code_states_stats.sql
+            encoding: utf8

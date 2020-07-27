@@ -81,12 +81,11 @@ public class CovidDataLoader {
             int deathCaseState = convertStringToInt(state.select("div.st_all_counts > div.tick-death > small").text());
             stateStats.setDeaths(deathCaseState);
 
-            stateStats.setCountryStats(countryStats);
+            stateStats.setCountryCode(Country.INDIA.getCode());
             stateStats.setLastUpdatedFromSource(dateFromSource);
             stateSet.add(stateStats);
         });
 
-        countryStats.setStateStats(stateSet);
 
         countryStatsRepository.save(countryStats);
     }

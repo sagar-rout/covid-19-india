@@ -6,40 +6,11 @@ UTC timezone, App has scheduler which will refresh the data from the source.
 We are using web-scraping (https://en.wikipedia.org/wiki/Web_scraping) technique to get the required information
 from the website.
 
+## Deployment strategy
+
+We are bit lazy, so we are using docker to wrap our application. Please refer [maven.yml](.github/workflows/maven.yml).
+
+
 ## As of now, we are providing few endpoints :
 
-### 1. Register yourself and get access token
-
-POST /users 
-
-> Request Body
-```json
-{
-  "emailId" : "john@doe.com",
-  "purpose" : "data analytics"
-}
-```  
-
-> Response
-```json
- {
-   "id" : "47422e0a-b219-4521-829c-7d9e81c2cfb7",
-   "emailId" : "john@doe.com",
-   "accessToken" : "X5SJ4VRNaSRObmn1dd",
-   "purpose" : "data analytics"
- }
- ```
-
-### 2. Use access token to get your information
-
-GET /users?emailId=john@doe.com
-
-> Response
-```json
- {
-   "id" : "47422e0a-b219-4521-829c-7d9e81c2cfb7",
-   "emailId" : "john@doe.com",
-   "accessToken" : "X5SJ4VRNaSRObmn1dd",
-   "purpose" : "data analytics"
- }
-```
+### 1. Get country stats 

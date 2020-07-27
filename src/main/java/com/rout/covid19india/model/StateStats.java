@@ -26,9 +26,8 @@ public class StateStats extends Region {
     @Enumerated(EnumType.STRING)
     private StateCode stateCode;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_stats_id")
-    private CountryStats countryStats;
+    @Column(nullable = false)
+    private String countryCode;
 
     public UUID getId() {
         return id;
@@ -39,21 +38,21 @@ public class StateStats extends Region {
         return this;
     }
 
-    public CountryStats getCountryStats() {
-        return countryStats;
-    }
-
-    public StateStats setCountryStats(CountryStats countryStats) {
-        this.countryStats = countryStats;
-        return this;
-    }
-
     public StateCode getStateCode() {
         return stateCode;
     }
 
     public StateStats setStateCode(StateCode stateCode) {
         this.stateCode = stateCode;
+        return this;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public StateStats setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
         return this;
     }
 
@@ -82,7 +81,7 @@ public class StateStats extends Region {
                 ", stateName=" + stateName +
                 ", totalConfirmed=" + totalConfirmed +
                 ", stateCode='" + stateCode + '\'' +
-                ", countryStats=" + countryStats +
+                ", countryCode=" + countryCode +
                 '}';
     }
 }

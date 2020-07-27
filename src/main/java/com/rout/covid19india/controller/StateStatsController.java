@@ -1,6 +1,7 @@
 package com.rout.covid19india.controller;
 
 import com.rout.covid19india.dto.StateStatsDto;
+import com.rout.covid19india.service.BadRequestException;
 import com.rout.covid19india.service.StateStatsService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +23,23 @@ public class StateStatsController {
         this.stateStatsService = stateStatsService;
     }
 
-    @GetMapping(value = "/state-stats/{stateCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/states-stats/{stateCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     public StateStatsDto findLatestStatsByStateCode(@PathVariable("stateCode") String stateCode) {
         return stateStatsService.findLatestStatsByStateCode(stateCode);
     }
 
-    @GetMapping(value = "/state-stats", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<StateStatsDto> findAllStatsByStateCode(@RequestParam("stateCode") String stateCode) {
-        return stateStatsService.findAllStatsByStateCode(stateCode);
+    @GetMapping(value = "/states-stats", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<StateStatsDto> findAllStatsByStateCodeOrCountryCode(@RequestParam(value = "stateCode", required = false) String stateCode,
+                                                                    @RequestParam(value = "countryCode", required = false) String countryCode) {
+
+        if (stateCode == null && countryCode == null) {
+            throw new BadRequestException("One should be present from stateCode or countryCode");
+        }
+
+        if (stateCode != null && countryCode != null) {
+            throw new BadRequestException("Both stateCode and countryCode are not allowed.");
+        }
+
+        return stateStatsService.findAllStatsByStateCodeOrCountryCode(stateCode, countryCode);
     }
 }

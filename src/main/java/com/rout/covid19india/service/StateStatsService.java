@@ -2,9 +2,11 @@ package com.rout.covid19india.service;
 
 import com.rout.covid19india.dto.StateStatsDto;
 import com.rout.covid19india.dto.transformer.StateStatsTransformer;
+import com.rout.covid19india.model.StateCode;
 import com.rout.covid19india.model.StateStats;
 import com.rout.covid19india.repository.StateStatsRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,22 +22,24 @@ public class StateStatsService {
         this.stateStatsTransformer = stateStatsTransformer;
     }
 
+    @Transactional(readOnly = true)
     public StateStatsDto findLatestStatsByStateCode(String stateCode) {
-        final StateStats stateStats = stateStatsRepository.findFirstByStateCode(stateCode)
-                .orElseThrow(() -> new NoDataFoundException(String.format("StateStats are missing for this %s stateCode", stateCode)));
+        final StateStats stateStats = stateStatsRepository.findFirstByStateCode(StateCode.fromString(stateCode))
+                .orElseThrow(() -> new BadRequestException(String.format("StateCode %s not supported.", stateCode)));
 
         return stateStatsTransformer.fromDomainToDto(stateStats);
     }
 
-    public List<StateStatsDto> findAllStatsByStateCode(String stateCode) {
-        return stateStatsRepository.findAllByStateCode(stateCode).stream()
-                .map(this.stateStatsTransformer::fromDomainToDto)
-                .collect(Collectors.toList());
-    }
+    @Transactional(readOnly = true)
+    public List<StateStatsDto> findAllStatsByStateCodeOrCountryCode(String stateCode, String countryCode) {
+        List<StateStats> stateStats;
 
-    public List<StateStatsDto> findAllStatesLatestStats() {
-        return stateStatsRepository.findAll()
-                .stream()
+        if (stateCode != null) {
+            stateStats = stateStatsRepository.findAllByStateCode(StateCode.fromString(stateCode));
+        } else {
+            stateStats = stateStatsRepository.findAllByCountryCode(countryCode);
+        }
+        return stateStats.stream()
                 .map(this.stateStatsTransformer::fromDomainToDto)
                 .collect(Collectors.toList());
     }

@@ -1,53 +1,24 @@
 package com.rout.covid19india.controller;
 
-import com.rout.covid19india.service.NoDataFoundException;
-import org.springframework.http.HttpHeaders;
+import com.rout.covid19india.service.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 /**
  * @author Sagar Rout (sagar@rout.dev)
  */
-@ControllerAdvice
-public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+@RestControllerAdvice
+public class CustomGlobalExceptionHandler {
 
-    @ExceptionHandler(NoDataFoundException.class)
-    public void customHandleError(HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.NOT_FOUND.value());
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status, WebRequest request) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
-        body.put("status", status.value());
-
-        //Get all fields errors
-        List<String> errors = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(x -> x.getDefaultMessage())
-                .collect(Collectors.toList());
-
-        body.put("errors", errors);
-
-        return new ResponseEntity<>(body, headers, status);
-
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<CustomErrorResponse> handleGenericBadRequestException(BadRequestException e) {
+        CustomErrorResponse error = new CustomErrorResponse("BAD_REQUEST", e.getMessage());
+        error.setTimestamp(LocalDateTime.now());
+        error.setStatus((HttpStatus.BAD_REQUEST.value()));
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
