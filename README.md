@@ -6,11 +6,42 @@ UTC timezone, App has scheduler which will refresh the data from the source.
 We are using web-scraping (https://en.wikipedia.org/wiki/Web_scraping) technique to get the required information
 from the website.
 
-## Deployment strategy
+## Development and Deployment
 
-We are bit lazy, so we are using docker to wrap our application. Please refer [maven.yml](.github/workflows/maven.yml).
+For local development and deployment. Please follow [HELP.md](HELP.md).
+
+> Note: As of now, app provides information for India.
+
+## Supported country and state  
+Supported [location](LOCATION.md). 
+
+### 1. Get the latest stats for country
+> /api/covid/countries-stats/{countryCode}
+```bash
+curl -v https://rout.dev/api/covid/countries-stats?countryCode=IN
+``` 
 
 
-## As of now, we are providing few endpoints :
+### 2. Get the historical stats for country
+> /api/covid/countries-stats?countryCode=IN 
+```bash
+curl -v https://rout.dev/api/covid/countries-stats?countryCode=IN
+```
 
-### 1. Get country stats 
+### 3. Get the latest stats for state
+> /api/covid/states-stats/{stateCode}
+```bash
+curl -v https://rout.dev/api/covid/states-stats/DL
+```
+
+### 4. Get the historical stats for state
+> /api/covid/states-stats?stateCode=DL
+```bash
+curl -v https://rout.dev/api/covid/states-stats?stateCode=DL
+```
+
+### 5. Get the historical stats for country's states
+> /api/covid/states-stats?countryCode=IN
+```bash
+curl -v https://rout.dev/api/covid/states-stats?countryCode=IN
+```
